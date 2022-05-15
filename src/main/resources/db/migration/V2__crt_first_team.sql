@@ -1,0 +1,1 @@
+INSERT INTO teams (name_team) values ('Реал Мадрид');
