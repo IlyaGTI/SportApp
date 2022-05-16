@@ -10,7 +10,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -58,6 +61,16 @@ public class MatchServiceImpl implements MatchService {
     @Transactional(readOnly = true)
     public Date findOne() {
         return resultRepo.findLastDateMatch();
+    }
+
+    @Override
+    public List<Match> findMatchByDate(String date) throws ParseException {
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date searching = format.parse(date);
+
+
+        return matchRepo.findAllByDateMatch(searching);
     }
 
 }

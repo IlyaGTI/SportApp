@@ -14,11 +14,12 @@ import java.util.List;
 public class TeamService {
 
     private TeamRepo teamRepo;
-
+    //Создание команды
     public Team createTeam(Team team){
         return teamRepo.save(team);
     }
 
+    //Вывод тунирной таблицы
     @Transactional(readOnly = true)
     public List<Team> getTable(){
         return teamRepo.resultNow();

@@ -23,6 +23,7 @@ public class ResultService {
 
     private ResultRepoImpl resultRepo;
 
+    //Вывод состояние турнирной таблицы на опреденную дату
     public List<Result> findResult(String date) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 

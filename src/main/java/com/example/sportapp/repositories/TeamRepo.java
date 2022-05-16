@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface TeamRepo extends JpaRepository<Team, Integer> {
 
+    //Вывод турнирной таблицы
     @Query("select t from Team as t order by t.points DESC ")
     List<Team> resultNow();
 

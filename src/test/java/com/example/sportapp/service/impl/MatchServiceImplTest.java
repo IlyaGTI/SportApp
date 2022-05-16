@@ -45,5 +45,5 @@ class MatchServiceImplTest {
         assertThat(testing.get(0).getPoints()).isEqualTo(9);
         assertThat(testing.get(0).getScored()).isEqualTo(5);
     }
-    
+
 }

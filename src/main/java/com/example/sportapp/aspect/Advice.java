@@ -7,7 +7,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
+//Простое логирования, при помощи Аспектов
 
 @Aspect
 @Component
@@ -20,12 +20,12 @@ public class Advice {
 
     @Before("logPointCut()")
     public void beforeMethod(JoinPoint jp){
-        log.info("Метод " + jp.getSignature() + " начал работу");
+        log.info("Метод " + jp.getSignature().getName() + " начал работу");
     }
 
     @After("logPointCut()")
     public void afterMethod(JoinPoint jp){
-        log.info("Метод " + jp.getSignature() + " закончил работу");
+        log.info("Метод " + jp.getSignature().getName() + " закончил работу");
     }
 
     @AfterThrowing(value = "execution(* com.example.sportapp.service.*.*(..))", throwing = "e")
@@ -33,5 +33,9 @@ public class Advice {
         if(jp.getSignature().equals(null)) {
             log.info(e.getMessage());
         }
+    }
+    @AfterReturning(value = "logPointCut()", returning = "val")
+    public void giveValue(JoinPoint jp, Object val){
+        log.info("Метод " + jp.getSignature().getName() + " вернул " + val);
     }
 }

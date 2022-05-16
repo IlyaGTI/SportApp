@@ -27,4 +27,6 @@ public class Result {
 
     private Integer playedGames;
 
+    //Объект для передачи в него результата выполнения метода getResult
+
 }
