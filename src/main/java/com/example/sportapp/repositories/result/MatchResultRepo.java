@@ -12,4 +12,6 @@ public interface MatchResultRepo {
 
     //Вывод матчей между последней датой и датой введной пользователем
     List<Match> findBetweenTwoDates(Date date1, Date date2);
+
+    List<Match> findAll();
 }

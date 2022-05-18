@@ -28,12 +28,10 @@ public class ResultService {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
         Date fin = format.parse(date);
-        Date str = resultRepo.findLastDateMatch();
 
         java.sql.Date finish = new java.sql.Date(fin.getTime());
-        java.sql.Date start = new java.sql.Date(str.getTime());
 
-        List<Match> search = resultRepo.findBetweenTwoDates(finish, start);
+        List<Match> search = resultRepo.findAll();
 
         List<Result> result = new ArrayList<>();
 
@@ -71,8 +69,8 @@ public class ResultService {
         } );
 
         return result.stream()
-                .filter(p -> p.getDateLastGame().equals(finish))
-                .sorted(Comparator.comparingInt(Result::getPoints).reversed()).
-                collect(Collectors.toList());
+                .filter(p -> p.getDateLastGame().equals(finish) || p.getDateLastGame().after(finish))
+                .sorted(Comparator.comparingInt(Result::getPoints).reversed()).distinct()
+                .collect(Collectors.toList());
     }
 }

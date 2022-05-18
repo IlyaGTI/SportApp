@@ -41,4 +41,15 @@ public class ResultRepoImpl implements  MatchResultRepo {
 
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
+
+    @Override
+    public List<Match> findAll() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Match> criteriaQuery = criteriaBuilder.createQuery(Match.class);
+        Root<Match> matchRoot = criteriaQuery.from(Match.class);
+        criteriaQuery.select(matchRoot);
+        criteriaQuery.orderBy(criteriaBuilder.desc(matchRoot.get("dateMatch")));
+
+        return entityManager.createQuery(criteriaQuery).getResultList();
+    }
 }
