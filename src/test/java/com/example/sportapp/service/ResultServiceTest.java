@@ -69,27 +69,22 @@ class ResultServiceTest {
         nresults.add(testTeam1);
         nresults.add(testTeam2);
 
-        List<Result> emtyResult = new ArrayList<>();
-        emtyResult.add(new Result(1,"Тест1", 0, 0, 0, finalDate, 0));
-        emtyResult.add(new Result(2,"Тест2", 0, 0, 0, finalDate, 0));
-
-
         when(resultRepo.findBetweenTwoDates(searchingDate, finalDate)).thenReturn(matches);
 
         when(resultRepo.findLastDateMatch()).thenReturn(format.parse("2021-09-03"));
 
-        List<Result> fresults = ResultFacade.emptyListResult(nresults);
+        when(teamRepo.findAll()).thenReturn(nresults);
 
-        List<Result> results = resultService.findResult("2021-09-09");
+        List<Result> results = ResultFacade.emptyListResult(nresults);
+        List<Result> results1 = resultService.findResult("2021-09-09");
 
         List<Integer> points = new ArrayList<>();
-        points.add(results.get(0).getPoints());
-        points.add(results.get(1).getPoints());
+        points.add(results1.get(0).getPoints());
+        points.add(results1.get(1).getPoints());
 
         assertThat(points.get(0)).isEqualTo(3);
         assertThat(points.get(1)).isEqualTo(3);
 
         Mockito.verify(resultRepo, Mockito.times(1)).findBetweenTwoDates(searchingDate, finalDate);
-        Mockito.verify(teamRepo, Mockito.times(1)).resultNow();
     }
 }
