@@ -14,4 +14,6 @@ public interface MatchResultRepo {
     List<Match> findBetweenTwoDates(Date date1, Date date2);
 
     List<Match> findAll();
+
+
 }

@@ -25,7 +25,7 @@ public class ResultRepoImpl implements  MatchResultRepo {
         CriteriaQuery<Date> criteriaQuery = criteriaBuilder.createQuery(Date.class);
         Root<Match> matchRoot = criteriaQuery.from(Match.class);
         criteriaQuery.select(matchRoot.get("dateMatch"));
-        criteriaQuery.orderBy(criteriaBuilder.desc(matchRoot.get("dateMatch")));
+        criteriaQuery.orderBy(criteriaBuilder.asc(matchRoot.get("dateMatch")));
 
         return entityManager.createQuery(criteriaQuery).getResultList().get(0);
     }
@@ -37,7 +37,7 @@ public class ResultRepoImpl implements  MatchResultRepo {
         Root<Match> matchRoot = criteriaQuery.from(Match.class);
         criteriaQuery.select(matchRoot);
         criteriaQuery.where(criteriaBuilder.between(matchRoot.get("dateMatch"), date1, date2));
-        criteriaQuery.orderBy(criteriaBuilder.desc(matchRoot.get("dateMatch")));
+        criteriaQuery.orderBy(criteriaBuilder.asc(matchRoot.get("dateMatch")));
 
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
@@ -52,4 +52,6 @@ public class ResultRepoImpl implements  MatchResultRepo {
 
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
+
+
 }

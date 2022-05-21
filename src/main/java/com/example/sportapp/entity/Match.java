@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 @Table(name = "`matchs`", indexes = {
         @Index(name = "id_away_idx", columnList = "away_team_id"),
@@ -43,4 +44,16 @@ public class Match {
     private Date dateMatch;
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Match)) return false;
+        Match match = (Match) o;
+        return id.equals(match.id) && Objects.equals(homeTeam, match.homeTeam) && homeTeamGoal.equals(match.homeTeamGoal) && Objects.equals(awayTeam, match.awayTeam) && awayTeamGoal.equals(match.awayTeamGoal) && dateMatch.equals(match.dateMatch);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, homeTeam, homeTeamGoal, awayTeam, awayTeamGoal, dateMatch);
+    }
 }
