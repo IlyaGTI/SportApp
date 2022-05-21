@@ -80,16 +80,11 @@ class ResultServiceTest {
 
         List<Result> fresults = ResultFacade.emptyListResult(nresults);
 
+        List<Result> results = resultService.findResult("2021-09-09");
 
-        Map<Integer, Result> mapRes= fresults.stream().collect(Collectors.toMap(Result::getId, Function.identity()));
-
-
-                resultService.findResult("2021-09-09");
-
-        fresults.get(0);
         List<Integer> points = new ArrayList<>();
-        points.add(fresults.get(0).getPoints());
-        points.add(fresults.get(1).getPoints());
+        points.add(results.get(0).getPoints());
+        points.add(results.get(1).getPoints());
 
         assertThat(points.get(0)).isEqualTo(3);
         assertThat(points.get(1)).isEqualTo(3);
